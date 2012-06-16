@@ -2,13 +2,14 @@
 #define __BUMOTSTRINGS_H
 
 #include <string>
+#include <wx/wx.h>
 
-const char * const BuMotFrame_Title = "Bu-Mot";
-const char * const Fin_String = "Eng/RapMoz: ";
-const char * const Fin_Button_String = "Fin!";
-const char * const Message_Fill_Text = "Please fill the search string";
-const char * const Fin_In_Rap = "Fin rap";
-const char * const Fin_In_Eng = "Fin eng";
-const char * const Fin_Ext = "Fin la";
+const wxChar * const BuMotFrame_Title = wxT("Bu-Mot");
+const wxChar * const Fin_String = wxT("Eng/RapMoz: ");
+const wxChar * const Fin_Button_String = wxT("Fin!");
+const wxChar * const Message_Fill_Text = wxT("Please fill the search string");
+const wxChar * const Fin_In_Rap = wxT("Fin rap");
+const wxChar * const Fin_In_Eng = wxT("Fin eng");
+const wxChar * const Fin_Ext = wxT("Fin la");
 
 #endif

@@ -43,7 +43,7 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   wxBoxSizer *panelSizer = new wxBoxSizer(wxHORIZONTAL);
   
   panelSizer->Add(new wxStaticText(finPanel, -1, Fin_String), 0, 0);
-  txtFin = new wxTextCtrl(finPanel, -1, "");
+  txtFin = new wxTextCtrl(finPanel, -1, wxT(""));
   panelSizer->Add(txtFin, 1, 0, 0);
   butFin = new wxButton(finPanel, BUTTON_FIN, Fin_Button_String);
   butFin->SetDefault();
@@ -80,7 +80,7 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
   }
 
   BuMotFindCriteria criteria;
-  criteria.set_search_string(static_cast<const char *>(txtFin->GetValue()));
+  criteria.set_search_string(static_cast<const char *>(txtFin->GetValue().char_str()));
   criteria.set_search_in_rap(cbFinRap->GetValue());
   criteria.set_search_in_eng(cbFinEng->GetValue());
   criteria.set_extended_search(cbExtended->GetValue());
@@ -95,10 +95,10 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
        it!=result.end(); ++it) {
   
     contents->BeginBold();
-    contents->WriteText(it->get_rapmot());
+    contents->WriteText(wxString(it->get_rapmot().c_str(), wxConvUTF8));
     contents->EndBold();
-    contents->WriteText(": ");
-    contents->WriteText(it->get_engmot());
+    contents->WriteText(wxT(": "));
+    contents->WriteText(wxString(it->get_engmot().c_str(), wxConvUTF8));
     contents->Newline();
   }
 
