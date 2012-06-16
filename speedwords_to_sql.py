@@ -29,8 +29,14 @@ def convert(fileName):
             error(l)
             continue
 
-        query = "INSERT INTO dict (rap, mot) VALUES (" + \
+        if pair[0][0]!="-" and pair[0][-1]!="-":
+            finrap = pair[0].replace('-','')
+        else:
+            finrap = pair[0]
+
+        query = "INSERT INTO dict (rap, mot, finrap) VALUES (" + \
           stosingle(pair[0]) + "," + \
+          stosingle(finrap) + "," + \
           stosingle(pair[1]) + ");"
 
         output(query)
