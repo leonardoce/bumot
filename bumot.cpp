@@ -37,9 +37,10 @@ EVT_BUTTON(BUTTON_FIN, BuMotFrame::OnFin)
 END_EVENT_TABLE()
 
 BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
+  wxPanel *kaPanel = new wxPanel(this);
   wxBoxSizer *kaSizer = new wxBoxSizer(wxVERTICAL);
 
-  wxPanel *finPanel = new wxPanel(this);
+  wxPanel *finPanel = new wxPanel(kaPanel);
   wxBoxSizer *panelSizer = new wxBoxSizer(wxHORIZONTAL);
   
   panelSizer->Add(new wxStaticText(finPanel, -1, Fin_String), 0, 0);
@@ -49,9 +50,9 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   butFin->SetDefault();
   panelSizer->Add(butFin, 0, 0);
   finPanel->SetSizer(panelSizer);
-  kaSizer->Add(finPanel, 0, wxEXPAND | wxALL, 0);
+  kaSizer->Add(finPanel, 0, wxEXPAND | wxALL, 5);
 
-  wxPanel *cbPanel = new wxPanel(this);
+  wxPanel *cbPanel = new wxPanel(kaPanel);
   wxBoxSizer *cbPanelSizer = new wxBoxSizer(wxHORIZONTAL);
 
   cbFinRap = new wxCheckBox(cbPanel, -1, Fin_In_Rap);
@@ -64,13 +65,13 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   cbExtended->SetValue(false);
   cbPanelSizer->Add(cbExtended, 1, wxEXPAND | wxALL, 0);
   cbPanel->SetSizer(cbPanelSizer);
-  kaSizer->Add(cbPanel, 0, wxEXPAND | wxALL, 0);
+  kaSizer->Add(cbPanel, 0, wxEXPAND | wxALL, 5);
 
-  contents = new wxRichTextCtrl(this, -1);
+  contents = new wxRichTextCtrl(kaPanel, -1);
   contents->SetEditable(false);
   kaSizer->Add(contents, 1, wxEXPAND | wxALL, 0);
 
-  SetSizer (kaSizer);
+  kaPanel->SetSizer (kaSizer);  
 }
 
 void BuMotFrame::OnFin(wxCommandEvent &evt) {
