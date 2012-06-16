@@ -37,7 +37,9 @@ EVT_BUTTON(BUTTON_FIN, BuMotFrame::OnFin)
 END_EVENT_TABLE()
 
 BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
-  SetIcon(wxIcon(wxT("aaaa")));
+  wxIcon mainIcon(wxT("aaaa"));
+  
+  if(mainIcon.IsOk()) SetIcon(mainIcon);
 
   wxPanel *kaPanel = new wxPanel(this);
   wxBoxSizer *kaSizer = new wxBoxSizer(wxVERTICAL);
