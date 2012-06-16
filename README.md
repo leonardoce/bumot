@@ -16,6 +16,10 @@ The dictionary file is parsed by a Python script to make
 a SQLite database, which is consulted by a 
 C++/wxWidgets/Boost app.
 
+I think you should be able to compile this App on Windows. 
+Surely it works on Linux. You will need CMake and the 
+wxWidgets toolkit. I'm working with wxWidgets 2.9.3.
+
 Acknowledgements
 ----------------
 
