@@ -14,6 +14,26 @@ public:
   const char *what() { return theMessage.c_str(); };
 };
 
+class BuMotFindCriteria {
+private:
+  std::string searchString;
+  bool searchInRap;
+  bool searchInEng;
+  bool extendedSearch;
+
+public:
+  void set_search_string(const std::string &theSearchString) {  searchString = theSearchString; };
+  const std::string &get_search_string() const { return searchString; };
+
+  void set_search_in_rap(bool mustSearchInRap) { searchInRap=mustSearchInRap; };
+  bool get_search_in_rap() const { return searchInRap; };
+
+  void set_search_in_eng(bool mustSearchInEng) { searchInEng=mustSearchInEng; };
+  bool get_search_in_eng() const { return searchInEng; };
+
+  void set_extended_search(bool mustDoExtendedSearch) { extendedSearch = mustDoExtendedSearch; };
+  bool get_extended_search() const { return extendedSearch; };
+};
 
 class BuMotDb {
 public:
@@ -36,7 +56,7 @@ public:
   ~BuMotDb() throw ();
 
   void Init();
-  std::vector<BuMotRecord> Find(const std::string &findStr);
+  std::vector<BuMotRecord> Find(const BuMotFindCriteria &criteria);
 };
 
 BuMotDb& CurrentDatabase();

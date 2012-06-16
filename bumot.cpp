@@ -20,6 +20,8 @@ private:
   wxTextCtrl *txtFin;
   wxRichTextCtrl *contents;
   wxButton *butFin;
+  wxCheckBox *cbFinRap;
+  wxCheckBox *cbFinEng;
 
   void OnFin(wxCommandEvent &evt);
 public:
@@ -46,8 +48,19 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   butFin->SetDefault();
   panelSizer->Add(butFin, 0, 0);
   finPanel->SetSizer(panelSizer);
-
   kaSizer->Add(finPanel, 0, wxEXPAND | wxALL, 0);
+
+  wxPanel *cbPanel = new wxPanel(this);
+  wxBoxSizer *cbPanelSizer = new wxBoxSizer(wxHORIZONTAL);
+
+  cbFinRap = new wxCheckBox(cbPanel, -1, Fin_In_Rap);
+  cbFinRap->SetValue(true);
+  cbPanelSizer->Add(cbFinRap, 1, wxEXPAND | wxALL, 0);
+  cbFinEng = new wxCheckBox(cbPanel, -1, Fin_In_Eng);
+  cbFinEng->SetValue(false);
+  cbPanelSizer->Add(cbFinEng, 1, wxEXPAND | wxALL, 0);
+  cbPanel->SetSizer(cbPanelSizer);
+  kaSizer->Add(cbPanel, 0, wxEXPAND | wxALL, 0);
 
   contents = new wxRichTextCtrl(this, -1);
   contents->SetEditable(false);
@@ -62,7 +75,11 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
     return;
   }
 
-  std::vector<BuMotDb::BuMotRecord> result = CurrentDatabase().Find(static_cast<const char *>(txtFin->GetValue()));
+  BuMotFindCriteria criteria;
+  criteria.set_search_string(static_cast<const char *>(txtFin->GetValue()));
+  criteria.set_search_in_rap(cbFinRap->GetValue());
+  criteria.set_search_in_eng(cbFinEng->GetValue());
+  std::vector<BuMotDb::BuMotRecord> result = CurrentDatabase().Find(criteria);
 
   contents->Clear();
   contents->BeginSuppressUndo();

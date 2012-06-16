@@ -38,20 +38,32 @@ std::string stosingle(const std::string &query) {
   return result;
 }
 
-std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const std::string &findStr) {
+inline std::string createLikeClause(const std::string &txt, bool extended) {
+  if (!extended) {
+    return txt + "%";
+  } else {
+    return "%" + txt + "%";
+  }
+}
+
+std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const BuMotFindCriteria &criteria) {
   std::vector<BuMotDb::BuMotRecord> result;
 
-  std::string sql = "SELECT rap, mot FROM dict WHERE finrap " 
-    "LIKE %1% OR mot LIKE %2%";
-  
-  std::string formattedSql = 
-    str( boost::format(sql) 
-	 % stosingle(findStr + "%") 
-	 % stosingle(findStr + "%") );
+  std::string sql = "SELECT rap, mot FROM dict WHERE 0=1";
+
+  if (criteria.get_search_in_rap()) {
+    sql += " OR finrap LIKE " + stosingle(createLikeClause(criteria.get_search_string(), criteria.get_extended_search()));
+  }
+ 
+  if (criteria.get_search_in_eng()) {
+    sql += " OR mot LIKE " + stosingle(createLikeClause(criteria.get_search_string(), criteria.get_extended_search()));
+  }
   
   try {
     std::tr1::shared_ptr<db_recordset> rs = 
-      dbConnection->sql_retrieve(formattedSql);
+      dbConnection->sql_retrieve(sql);
+
+    std::cout << sql << std::endl;
     
     while(rs->next()) {
       BuMotDb::BuMotRecord record(rs->get_string_field(0), 
