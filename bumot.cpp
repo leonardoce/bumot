@@ -1,6 +1,8 @@
 #include <wx/wx.h>
 #include <wx/html/htmlwin.h>
 #include "bumotstrings.hpp"
+#include "bumotdb.hpp"
+#include <vector>
 
 /**
  * C e u sip rowe f u rap lin lie bu-mot
@@ -58,10 +60,14 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
     wxMessageBox(Message_Fill_Text, BuMotFrame_Title);
     return;
   }
+
+  std::vector<BuMotDb::BuMotRecord> result = CurrentDatabase().Find(static_cast<const char *>(txtFin->GetValue()));
   wxMessageBox("Bau");
 }
 
 bool BuMotApp::OnInit() {
+  CurrentDatabase().Init();
+
   BuMotFrame *frame = new BuMotFrame(BuMotFrame_Title);
   frame->Show(true);
   SetTopWindow(frame);

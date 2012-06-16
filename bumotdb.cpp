@@ -1,3 +1,4 @@
+#include <iostream>
 #include "bumotdb.hpp"
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
@@ -39,20 +40,24 @@ std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const std::string &findStr) {
   std::vector<BuMotDb::BuMotRecord> result;
 
   std::string sql = "SELECT rap, mot FROM dict WHERE rap " 
-    "ILIKE %1% OR mot ILIKE %2%";
+    "LIKE %1% OR mot LIKE %2%";
   
   std::string formattedSql = 
     str( boost::format(sql) 
 	 % stosingle("%" + findStr + "%") 
 	 % stosingle("%" + findStr + "%") );
   
-  std::tr1::shared_ptr<db_recordset> rs = 
-    dbConnection->sql_retrieve(sql);
-  
-  while(rs->next()) {
-    BuMotDb::BuMotRecord record(rs->get_string_field(0), 
-				rs->get_string_field(1));
-    result.push_back(record);
+  try {
+    std::tr1::shared_ptr<db_recordset> rs = 
+      dbConnection->sql_retrieve(formattedSql);
+    
+    while(rs->next()) {
+      BuMotDb::BuMotRecord record(rs->get_string_field(0), 
+				  rs->get_string_field(1));
+      result.push_back(record);
+    }
+  } catch(const std::exception &exc) {
+    std::cerr << exc.what() << std::endl;
   }
 
   return result;
