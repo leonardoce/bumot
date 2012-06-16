@@ -4,6 +4,7 @@
 
 const char * const Fin_String = "Eng/RapMoz: ";
 const char * const Fin_Button_String = "Fin!";
+const char * const Message_Fill_Text = "Please fill the search string";
 
 /**
  * C e u sip rowe f u rap lin lie bu-mot
@@ -14,14 +15,25 @@ public:
   virtual bool OnInit();
 };
 
+const int BUTTON_FIN = 600;
+
 class BuMotFrame : public wxFrame {
 private:
   wxTextCtrl *txtFin;
   wxHtmlWindow *contents;
   wxButton *butFin;
+
+  void OnFin(wxCommandEvent &evt);
 public:
   BuMotFrame(const wxString &title);
+
+protected:
+  DECLARE_EVENT_TABLE()
 };
+
+BEGIN_EVENT_TABLE(BuMotFrame, wxFrame)
+EVT_BUTTON(BUTTON_FIN, BuMotFrame::OnFin)
+END_EVENT_TABLE()
 
 BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   wxBoxSizer *kaSizer = new wxBoxSizer(wxVERTICAL);
@@ -32,7 +44,8 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   panelSizer->Add(new wxStaticText(finPanel, -1, Fin_String), 0, 0);
   txtFin = new wxTextCtrl(finPanel, -1, "");
   panelSizer->Add(txtFin, 1, 0, 0);
-  butFin = new wxButton(finPanel, -1, Fin_Button_String);
+  butFin = new wxButton(finPanel, BUTTON_FIN, Fin_Button_String);
+  butFin->SetDefault();
   panelSizer->Add(butFin, 0, 0);
   finPanel->SetSizer(panelSizer);
 
@@ -42,6 +55,14 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   kaSizer->Add(contents, 1, wxEXPAND | wxALL, 0);
 
   SetSizer (kaSizer);
+}
+
+void BuMotFrame::OnFin(wxCommandEvent &evt) {
+  if (txtFin->GetValue().Len()==0) {
+    wxMessageBox(Message_Fill_Text, BuMotFrame_Title);
+    return;
+  }
+  wxMessageBox("Bau");
 }
 
 bool BuMotApp::OnInit() {
