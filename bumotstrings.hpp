@@ -9,5 +9,6 @@ const char * const Fin_Button_String = "Fin!";
 const char * const Message_Fill_Text = "Please fill the search string";
 const char * const Fin_In_Rap = "Fin rap";
 const char * const Fin_In_Eng = "Fin eng";
+const char * const Fin_Ext = "Fin la";
 
 #endif

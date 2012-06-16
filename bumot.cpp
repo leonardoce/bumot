@@ -22,6 +22,7 @@ private:
   wxButton *butFin;
   wxCheckBox *cbFinRap;
   wxCheckBox *cbFinEng;
+  wxCheckBox *cbExtended;
 
   void OnFin(wxCommandEvent &evt);
 public:
@@ -59,6 +60,9 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   cbFinEng = new wxCheckBox(cbPanel, -1, Fin_In_Eng);
   cbFinEng->SetValue(false);
   cbPanelSizer->Add(cbFinEng, 1, wxEXPAND | wxALL, 0);
+  cbExtended = new wxCheckBox(cbPanel, -1, Fin_Ext);
+  cbExtended->SetValue(false);
+  cbPanelSizer->Add(cbExtended, -1, wxEXPAND | wxALL, 0);
   cbPanel->SetSizer(cbPanelSizer);
   kaSizer->Add(cbPanel, 0, wxEXPAND | wxALL, 0);
 
@@ -79,6 +83,7 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
   criteria.set_search_string(static_cast<const char *>(txtFin->GetValue()));
   criteria.set_search_in_rap(cbFinRap->GetValue());
   criteria.set_search_in_eng(cbFinEng->GetValue());
+  criteria.set_extended_search(cbExtended->GetValue());
   std::vector<BuMotDb::BuMotRecord> result = CurrentDatabase().Find(criteria);
 
   contents->Clear();
