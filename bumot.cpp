@@ -1,5 +1,5 @@
 #include <wx/wx.h>
-#include <wx/html/htmlwin.h>
+#include <wx/richtext/richtextctrl.h>
 #include "bumotstrings.hpp"
 #include "bumotdb.hpp"
 #include <vector>
@@ -18,7 +18,7 @@ const int BUTTON_FIN = 600;
 class BuMotFrame : public wxFrame {
 private:
   wxTextCtrl *txtFin;
-  wxHtmlWindow *contents;
+  wxRichTextCtrl *contents;
   wxButton *butFin;
 
   void OnFin(wxCommandEvent &evt);
@@ -49,7 +49,8 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
 
   kaSizer->Add(finPanel, 0, wxEXPAND | wxALL, 0);
 
-  contents = new wxHtmlWindow(this);
+  contents = new wxRichTextCtrl(this, -1);
+  contents->SetEditable(false);
   kaSizer->Add(contents, 1, wxEXPAND | wxALL, 0);
 
   SetSizer (kaSizer);
@@ -62,7 +63,24 @@ void BuMotFrame::OnFin(wxCommandEvent &evt) {
   }
 
   std::vector<BuMotDb::BuMotRecord> result = CurrentDatabase().Find(static_cast<const char *>(txtFin->GetValue()));
-  wxMessageBox("Bau");
+
+  contents->Clear();
+  contents->BeginSuppressUndo();
+
+  contents->BeginParagraphSpacing(0, 10);
+
+  for (std::vector<BuMotDb::BuMotRecord>::iterator it = result.begin();
+       it!=result.end(); ++it) {
+  
+    contents->BeginBold();
+    contents->WriteText(it->get_rapmot());
+    contents->EndBold();
+    contents->WriteText(": ");
+    contents->WriteText(it->get_engmot());
+    contents->Newline();
+  }
+
+  contents->EndSuppressUndo();
 }
 
 bool BuMotApp::OnInit() {

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6.2)
 PROJECT(bumot)
-find_package(wxWidgets COMPONENTS core base html REQUIRED)
+find_package(wxWidgets COMPONENTS core base richtext REQUIRED)
 INCLUDE(${wxWidgets_USE_FILE})
 
 set(SRCS bumot.cpp bumotdb.cpp sqlite3.c)

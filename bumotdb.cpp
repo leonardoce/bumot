@@ -3,6 +3,8 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
+const int Max_Result_Size = 100;
+
 BuMotDb::BuMotDb() 
 {
 }
@@ -44,8 +46,8 @@ std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const std::string &findStr) {
   
   std::string formattedSql = 
     str( boost::format(sql) 
-	 % stosingle("%" + findStr + "%") 
-	 % stosingle("%" + findStr + "%") );
+	 % stosingle(findStr + "%") 
+	 % stosingle(findStr + "%") );
   
   try {
     std::tr1::shared_ptr<db_recordset> rs = 
@@ -55,6 +57,8 @@ std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const std::string &findStr) {
       BuMotDb::BuMotRecord record(rs->get_string_field(0), 
 				  rs->get_string_field(1));
       result.push_back(record);
+
+      if (result.size()>Max_Result_Size) break;
     }
   } catch(const std::exception &exc) {
     std::cerr << exc.what() << std::endl;
