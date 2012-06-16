@@ -13,3 +13,7 @@ LDFLAGS = -static -mwindows
 RM = rm -f
 
 include Makefile.common
+
+bumot_min.exe : bumot
+	strip -s bumot.exe
+	upx bumot.exe
