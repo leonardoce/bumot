@@ -1,11 +1,10 @@
+OBJS = bumot.o bumotdb.o data_connection.o sqlite3.o
+
 .cpp.o:
 	g++ -c $(CFLAGS) -o $@ $<
 
 .c.o:
 	gcc -c $(CFLAGS) -o $@ $<
-
-bumot: bumot.o bumotdb.o data_connection.o sqlite3.o
-	g++ -o $@ $(LDFLAGS) $^ $(LIBS)
 
 .PHONY: all clean
 all: bumot

@@ -4,3 +4,6 @@ RM = rm -f
 LDFLAGS =
 
 include Makefile.common
+
+bumot: $(OBJS)
+	g++ -o $@ $(LDFLAGS) $^ $(LIBS)

@@ -14,6 +14,10 @@ RM = rm -f
 
 include Makefile.common
 
-bumot_min.exe : bumot
+bumot_rs.o: bumot_rs.rc
+	windres $< $@
+
+bumot: $(OBJS) bumot_rs.o
+	g++ -o $@ $(LDFLAGS) $^ $(LIBS)
 	strip -s bumot.exe
 	upx bumot.exe
