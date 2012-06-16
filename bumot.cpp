@@ -25,5 +25,4 @@ bool BuMotApp::OnInit() {
   return true;
 }
 
-int main(int argc, char **argv) {
-}
+IMPLEMENT_APP(BuMotApp)

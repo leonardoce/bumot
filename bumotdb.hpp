@@ -2,6 +2,7 @@
 #define __BUMOTDB_HPP
 
 #include <string>
+#include "data_connection.hpp"
 
 class Exception : public std::exception {
 private:
@@ -14,9 +15,12 @@ public:
 };
 
 class BuMotDb {
+private:
+  std::tr1::shared_ptr<db_connection> dbConnection;
+
 public:
   BuMotDb();
-  ~BuMotDb();
+  ~BuMotDb() throw ();
 
   void Init();
 };
