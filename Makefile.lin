@@ -2,16 +2,4 @@ CFLAGS = $(shell wx-config --cppflags) -g
 LIBS = $(shell wx-config --libs) -ldl
 RM = rm -f
 
-.cpp.o:
-	g++ -c $(CFLAGS) -o $@ $<
-
-.c.o:
-	gcc -c $(CFLAGS) -o $@ $<
-
-bumot: bumot.o bumotdb.o data_connection.o sqlite3.o
-	g++ -o $@ $^ $(LIBS)
-
-.PHONY: all clean
-all: bumot
-clean:
-	$(RM) *.o bumot
+include Makefile.common

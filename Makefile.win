@@ -1,0 +1,15 @@
+WXDIR = c:/dev/wxWidgets
+BOOSTDIR = c:/dev/boost_1_49_0
+CFLAGS = -D__WXMSW__ -D_UNICODE 
+CFLAGS += -I$(WXDIR)/include -I$(WXDIR)/lib/gcc_lib/mswu -I$(BOOSTDIR)
+LIBS = -L$(WXDIR)/lib/gcc_lib \
+  -lwsock32 -lwinmm  \
+  -lwxmsw29u_richtext -lwxmsw29u_html -lwxmsw29u_adv \
+  -lwxmsw29u_core -lwxbase29u_xml -lwxbase29u \
+  -lwxpng -lwxzlib -lwxexpat \
+  -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 \
+  -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lrpcrt4
+
+RM = del /y
+
+include Makefile.common
