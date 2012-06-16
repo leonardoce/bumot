@@ -1,6 +1,0 @@
-Objects bumotdb.cpp sqlite3.c bumot.cpp ;
-
-LINKLIBS += -ldl -lpthread ;
-LINK = g++ ;
-
-MainFromObjects studio : bumotdb.o bumot.o ;

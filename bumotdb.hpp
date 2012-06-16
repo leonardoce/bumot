@@ -7,7 +7,7 @@ class Exception : public std::exception {
 private:
   const std::string theMessage;
 public:
-  Exception(const std::string &theMessage) : msg(theMessage) {};
+  Exception(const std::string &msg) : theMessage(msg) {};
   ~Exception() throw () {};
 
   const char *what() { return theMessage.c_str(); };

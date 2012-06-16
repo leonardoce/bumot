@@ -3,5 +3,5 @@
 BuMotDb& CurrentDatabase()
 {
   static BuMotDb db;
-  return &db;
+  return db;
 }
