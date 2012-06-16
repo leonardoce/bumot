@@ -2,10 +2,6 @@
 #include <wx/html/htmlwin.h>
 #include "bumotstrings.hpp"
 
-const char * const Fin_String = "Eng/RapMoz: ";
-const char * const Fin_Button_String = "Fin!";
-const char * const Message_Fill_Text = "Please fill the search string";
-
 /**
  * C e u sip rowe f u rap lin lie bu-mot
  */
