@@ -63,8 +63,6 @@ std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const BuMotFindCriteria &criteri
     std::tr1::shared_ptr<db_recordset> rs = 
       dbConnection->sql_retrieve(sql);
 
-    std::cout << sql << std::endl;
-    
     while(rs->next()) {
       BuMotDb::BuMotRecord record(rs->get_string_field(0), 
 				  rs->get_string_field(1));
