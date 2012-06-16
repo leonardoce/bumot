@@ -12,7 +12,7 @@ const char * const Sqlite_Error_Message = "Error opening SQLite database %1%";
 const char * const Sqlite_Query_Error = "Error executing SQL: %1%";
 const char * const Sqlite_Getting_Result = "Error getting result of SQL: %1%";
 
-class sqlite_exception : std::exception
+class sqlite_exception : public std::exception
 {
 private:
   std::string reason;
