@@ -36,8 +36,8 @@ def convert(fileName):
 
         query = "INSERT INTO dict (rap, mot, finrap) VALUES (" + \
           stosingle(pair[0]) + "," + \
-          stosingle(finrap) + "," + \
-          stosingle(pair[1]) + ");"
+          stosingle(pair[1]) + "," + \
+          stosingle(finrap) + ");"
 
         output(query)
 
