@@ -62,7 +62,7 @@ BuMotFrame::BuMotFrame(const wxString &title) : wxFrame(NULL, -1, title) {
   cbPanelSizer->Add(cbFinEng, 1, wxEXPAND | wxALL, 0);
   cbExtended = new wxCheckBox(cbPanel, -1, Fin_Ext);
   cbExtended->SetValue(false);
-  cbPanelSizer->Add(cbExtended, -1, wxEXPAND | wxALL, 0);
+  cbPanelSizer->Add(cbExtended, 1, wxEXPAND | wxALL, 0);
   cbPanel->SetSizer(cbPanelSizer);
   kaSizer->Add(cbPanel, 0, wxEXPAND | wxALL, 0);
 
