@@ -9,7 +9,7 @@ LIBS = -L$(WXDIR)/lib/gcc_lib \
   -lwxpng -lwxzlib -lwxexpat \
   -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 \
   -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 -lrpcrt4
-
-RM = del /y
+LDFLAGS = -static -mwindows
+RM = rm -f
 
 include Makefile.common

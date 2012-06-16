@@ -1,5 +1,6 @@
 CFLAGS = $(shell wx-config --cppflags) -g
 LIBS = $(shell wx-config --libs) -ldl
 RM = rm -f
+LDFLAGS =
 
 include Makefile.common
