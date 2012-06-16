@@ -41,7 +41,7 @@ std::string stosingle(const std::string &query) {
 std::vector<BuMotDb::BuMotRecord> BuMotDb::Find(const std::string &findStr) {
   std::vector<BuMotDb::BuMotRecord> result;
 
-  std::string sql = "SELECT rap, mot FROM dict WHERE rap " 
+  std::string sql = "SELECT rap, mot FROM dict WHERE finrap " 
     "LIKE %1% OR mot LIKE %2%";
   
   std::string formattedSql = 
