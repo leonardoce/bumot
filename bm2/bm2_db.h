@@ -21,4 +21,10 @@ bool check_data_connection(data_connection *dc);
  */
 void delete_data_connection(data_connection *dc);
 
+/**
+ * Esegue una query
+ * @return True se va tutto bene
+ */
+void sql_exec(data_connection *dc, const char *sql);
+
 #endif
