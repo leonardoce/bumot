@@ -1,6 +1,11 @@
-OBJS = bstrlib.o bm2.o sqlite3.o bm2_db.o
-LDFLAGS = -ldl -lpthread
+OBJS = bstrlib.o bm2.o sqlite3.o bm2_db.o logging.o
 CCFLAGS = -Wall
+
+ifdef $(WIN32)
+LDFLAGS = -ldl -lpthread
+else
+LDFLAGS = 
+endif
 
 .c.o:
 	gcc -I. -c $(CCFLAGS) $<
