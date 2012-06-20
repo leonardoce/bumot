@@ -15,4 +15,4 @@ bm2: $(OBJS)
 
 .PHONY: clean
 clean:
-	$(RM) *.o bm2
+	$(RM) *.o bm2 bm2.exe
